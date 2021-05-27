@@ -41,4 +41,16 @@ Feature: TopUp Account
 
     #The scenarios below will need a payment service that accepts or rejects a request to add funds
     Scenario: Payment service rejects the request
+      Given Danny has 10 euro in his euro Revolut account
+      And Danny selects his BankAccount as his topUp method with 20 as the amount
+      Then TopUp amount is rejected if the BankAccount has no founds
+
     Scenario: Payment service accepts the request
+      Given Danny has 10 euro in his euro Revolut account
+      And Danny selects his BankAccount as his topUp method with 20 as the amount
+      Then TopUp amount is accepted if the BankAccount has founds
+
+    Scenario: send money to another account
+      Given Danny has 100 euro in his euro Revolut account
+      When Danny wants to send 10 euro to SonnysAccount
+      Then The 10 is taken out form Danny account and added to SonnysAccount
